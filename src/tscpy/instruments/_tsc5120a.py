@@ -60,8 +60,8 @@ class TSC5120A:
 		sleep(WAIT_AFTER_CONNECT)
 		self._receive()
 		# for some reason first send-receive does not work, so dummy
-		self._show('ADEV')
 		tmp = self._last_read
+		self._show('ADEV')
 		if tmp.find('Welcome') == -1:
 			self.tc.close()
 			self._connected = False
