@@ -21,9 +21,7 @@ def _plot_init():
 	ax = fig.gca()
 	return fig,ax
 
-def plot_adev(adevs=None):
-	if not adevs:
-		return None
+def plot_adev(adevs,tag='',tsc=None):
 	fig,ax = _plot_init()
 	for adev in adevs:
 		ax.errorbar(adev['adev']['tau'],adev['adev']['adev'],xerr=None,yerr=adev['adev']['err'],label="tau0 = {0}, neq bw = {1}".format(adev['TAU0'],adev['NEQBW']))
@@ -33,6 +31,7 @@ def plot_adev(adevs=None):
 	ax.legend()
 	ax.set_xlabel('tau [s]')
 	ax.set_ylabel('Allan deviation')
-	ax.set_title('TSC5120A @ {0}: Allan deviation data at {1}'.format(HOST,str(datetime.now())))
+	at_str = '' if tsc == None else '@ '+str(tsc.socket[0])
+	ax.set_title('{0}TSC5120A {1}: Allan deviation data captured at {2}.'.format(tag,at_str,str(datetime.now())))
 	return fig
 
