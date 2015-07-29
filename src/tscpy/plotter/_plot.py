@@ -19,10 +19,10 @@ def _plot_init():
 	fig = figure()
 	fig.add_axes()
 	ax = fig.gca()
-	return fig,ax
+	return fig,ax,str(datetime.now())
 
 def plot_adev(adevs,tag='',tsc=None):
-	fig,ax = _plot_init()
+	fig,ax,timestamp = _plot_init()
 	for adev in adevs:
 		ax.errorbar(adev['adev']['tau'],adev['adev']['adev'],xerr=None,yerr=adev['adev']['err'],label="tau0 = {0}, neq bw = {1}".format(adev['TAU0'],adev['NEQBW']))
 	ax.loglog()
@@ -32,6 +32,6 @@ def plot_adev(adevs,tag='',tsc=None):
 	ax.set_xlabel('tau [s]')
 	ax.set_ylabel('Allan deviation')
 	at_str = '' if tsc == None else '@ '+str(tsc.socket[0])
-	ax.set_title('{0}TSC5120A {1}: Allan deviation data captured at {2}.'.format(tag,at_str,str(datetime.now())))
+	ax.set_title('{0}TSC5120A {1}: Allan deviation data captured at {2}.'.format(tag,at_str,timestamp))
 	return fig
 
