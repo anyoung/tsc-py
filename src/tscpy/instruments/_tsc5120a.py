@@ -56,6 +56,7 @@ class TSC5120A:
 	
 	def __init__(self,host,port):
 		self._tc = Telnet(host,port)
+		self._socket = (host,port)
 		sleep(WAIT_AFTER_CONNECT)
 		self._receive()
 		# for some reason first send-receive does not work, so dummy
@@ -70,7 +71,6 @@ class TSC5120A:
 			self._show(TSC5120A.show_params.keys()[0])
 			self._connected = True
 			self._last_read = tmp
-			self._socket = (host,port)
 	
 	def close(self):
 		self.tc.close()
