@@ -16,13 +16,15 @@
 def _plot_init():
 	from datetime import datetime
 	from matplotlib.pyplot import figure
+	fig = figure()
+	fig.add_axes()
+	ax = fig.gca()
+	return fig,ax
 
 def plot_adev(adevs=None):
 	if not adevs:
 		return None
-	fig = figure()
-	fig.add_axes()
-	ax = fig.gca()
+	fig,ax = _plot_init()
 	for adev in adevs:
 		ax.errorbar(adev['adev']['tau'],adev['adev']['adev'],xerr=None,yerr=adev['adev']['err'],label="tau0 = {0}, neq bw = {1}".format(adev['TAU0'],adev['NEQBW']))
 	ax.loglog()
@@ -34,4 +36,3 @@ def plot_adev(adevs=None):
 	ax.set_title('TSC5120A @ {0}: Allan deviation data at {1}'.format(HOST,str(datetime.now())))
 	return fig
 
-_plot_init()
