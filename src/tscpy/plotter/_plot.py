@@ -17,7 +17,7 @@ def _plot_init():
 	from datetime import datetime
 	from matplotlib.pyplot import figure
 
-def plot_adev(self,adevs=None):
+def plot_adev(adevs=None):
 	if not adevs:
 		return None
 	fig = figure()
